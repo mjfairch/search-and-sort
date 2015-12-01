@@ -18,9 +18,9 @@ void _merge(int *, int *, int, int, int);
 
 void heap_sort(int *, int, int);
 typedef struct {
-	int *v;
-	int length;
-	int heap_size;
+    int *v;
+    int length;
+    int heap_size;
 } heap;
 void build_max_heap(heap *);
 void max_heapify(heap *, int);
@@ -43,14 +43,14 @@ int quicksort_partition(int *, int, int);
 */
 int linear_search(int *v, int l, int r, int x)
 {
-	int i, j=-1;
-	for (i = l; i <= r; ++i) {
-		if (v[i] == x) {
-			j=i;
-			break;
-		}
-	}
-	return j;
+    int i, j=-1;
+    for (i = l; i <= r; ++i) {
+        if (v[i] == x) {
+            j=i;
+            break;
+        }
+    }
+    return j;
 }
 
 /* Input:
@@ -69,20 +69,20 @@ int linear_search(int *v, int l, int r, int x)
 */
 int binary_search(int *v, int l, int r, int x)
 {
-	int i, j=-1, c; // i=current index, j=return value, c=comparison
-	while (l <= r) {
-		i=(l+r)/2;
-		c = v[i]-x;
-		if (c > 0)
-			r = i-1;
-		else if (c < 0)
-			l = i+1;
-		else {
-			j=i;
-			break;
-		}
-	}
-	return j;
+    int i, j=-1, c; // i=current index, j=return value, c=comparison
+    while (l <= r) {
+        i=(l+r)/2;
+        c = v[i]-x;
+        if (c > 0)
+            r = i-1;
+        else if (c < 0)
+            l = i+1;
+        else {
+            j=i;
+            break;
+        }
+    }
+    return j;
 }
 
 /* Input:
@@ -97,13 +97,13 @@ int binary_search(int *v, int l, int r, int x)
 */
 void insertion_sort(int *v, int l, int r)
 {
-	int i, j, vi;
-	for (i = l+1; i <= r; ++i) {
-		vi = v[i];
-		for (j = i-1; j >= l && v[j] > vi; --j)
-			v[j+1]=v[j];
-		v[j+1]=vi;
-	}
+    int i, j, vi;
+    for (i = l+1; i <= r; ++i) {
+        vi = v[i];
+        for (j = i-1; j >= l && v[j] > vi; --j)
+            v[j+1]=v[j];
+        v[j+1]=vi;
+    }
 }
 
 /* Input:
@@ -118,19 +118,19 @@ void insertion_sort(int *v, int l, int r)
 */
 void bubble_sort(int *v, int l, int r)
 {
-	int i,j,k,t,swaps=1;
-	for (k=r; swaps > 0; --k) {
-		swaps=0;
-		for (i=l; i<k; ++i) {
-			j=i+1;
-			if (v[i]>v[j]) {
-				t = v[i];
-				v[i] = v[j];
-				v[j] = t;
-				++swaps;
-			}
-		}
-	}
+    int i,j,k,t,swaps=1;
+    for (k=r; swaps > 0; --k) {
+        swaps=0;
+        for (i=l; i<k; ++i) {
+            j=i+1;
+            if (v[i]>v[j]) {
+                t = v[i];
+                v[i] = v[j];
+                v[j] = t;
+                ++swaps;
+            }
+        }
+    }
 }
 
 /* Input:
@@ -145,20 +145,20 @@ void bubble_sort(int *v, int l, int r)
 */
 void selection_sort(int *v, int l, int r)
 {
-	int i,j,k,t,min;
-	for (i=l; i<r; ++i) {
-		k=i;
-		min=v[i];
-		for (j=i+1; j<=r; ++j) {
-			if (v[j] < min) {
-				k=j;
-				min=v[j];
-			}
-		}
-		t=v[i];
-		v[i]=min;
-		v[k]=t;
-	}
+    int i,j,k,t,min;
+    for (i=l; i<r; ++i) {
+        k=i;
+        min=v[i];
+        for (j=i+1; j<=r; ++j) {
+            if (v[j] < min) {
+                k=j;
+                min=v[j];
+            }
+        }
+        t=v[i];
+        v[i]=min;
+        v[k]=t;
+    }
 }
 
 /* Input:
@@ -174,9 +174,9 @@ void selection_sort(int *v, int l, int r)
 */
 void merge_sort(int *v, int l, int r)
 {
-	int *w = _merge_sort(v, NULL, l, r);
-	if (w != NULL)
-		free(w);
+    int *w = _merge_sort(v, NULL, l, r);
+    if (w != NULL)
+        free(w);
 }
 
 /* Input:
@@ -193,26 +193,26 @@ void merge_sort(int *v, int l, int r)
 */
 int* _merge_sort(int *v, int *w, int l, int r)
 {
-	int n = r-l;
-	if (n == 0)
-		return NULL;
-	else if (n <= 64) { // Insertion sort is fast enough for small arrays
-		insertion_sort(v, l, r);
-		return NULL;
-	}
-	else {
-		if (w == NULL) {
-			if ((w = (int*)malloc(n*sizeof(int))) == NULL) {
-				fprintf(stderr, "Cannot allocate memory.\n");
-				exit(-1);
-			}
-		}
-		int m = (r+l)/2;
-		_merge_sort(v,w,l,m);
-		_merge_sort(v,w,m+1,r);
-		_merge(v,w,l,m,r);
-		return w;
-	}
+    int n = r-l;
+    if (n == 0)
+        return NULL;
+    else if (n <= 64) { // Insertion sort is fast enough for small arrays
+        insertion_sort(v, l, r);
+        return NULL;
+    }
+    else {
+        if (w == NULL) {
+            if ((w = (int*)malloc(n*sizeof(int))) == NULL) {
+                fprintf(stderr, "Cannot allocate memory.\n");
+                exit(-1);
+            }
+        }
+        int m = (r+l)/2;
+        _merge_sort(v,w,l,m);
+        _merge_sort(v,w,m+1,r);
+        _merge(v,w,l,m,r);
+        return w;
+    }
 }
 
 /* Input:
@@ -233,32 +233,32 @@ int* _merge_sort(int *v, int *w, int l, int r)
 */
 void _merge(int *v, int *w, int l, int m, int r)
 {
-	// Check arguments and create temporary vector w
-	int n = r-l+1;
-	if (l > m || m >= r || l < 0 || m < 0 || r < 0) {
-		fprintf(stderr, "Must have 0 <= l <= m < r\n");
-		exit(-1);
-	}
-	
-	// Put v[l]..v[m] into w from the left; put v[m+1]..v[r]
-	// into w in reverse order from the right.
-	int *vl = &v[l], *vm = &v[m], *vr = &v[r];
-	int k = 0;
-	while (vl <= vm)
-		w[k++] = *vl++;
-	while (vr > vm)
-		w[k++] = *vr--;
-	
-	// Merge from w back into v so that v[l]..v[r] is sorted.
-	int *wl = &w[0], *wm = &w[m-l], *wr = &w[n-1];
-	vl = &v[l];
-	k=0;
-	for (; wl <= wm && wr > wm; ++k)
-		v[l+k] = (*wl <= *wr ? *wl++ : *wr--);
-	for (; wl <= wm; ++k)
-		v[l+k] = *wl++;
-	for (; wr > wm; ++k)
-		v[l+k] = *wr--;
+    // Check arguments and create temporary vector w
+    int n = r-l+1;
+    if (l > m || m >= r || l < 0 || m < 0 || r < 0) {
+        fprintf(stderr, "Must have 0 <= l <= m < r\n");
+        exit(-1);
+    }
+    
+    // Put v[l]..v[m] into w from the left; put v[m+1]..v[r]
+    // into w in reverse order from the right.
+    int *vl = &v[l], *vm = &v[m], *vr = &v[r];
+    int k = 0;
+    while (vl <= vm)
+        w[k++] = *vl++;
+    while (vr > vm)
+        w[k++] = *vr--;
+    
+    // Merge from w back into v so that v[l]..v[r] is sorted.
+    int *wl = &w[0], *wm = &w[m-l], *wr = &w[n-1];
+    vl = &v[l];
+    k=0;
+    for (; wl <= wm && wr > wm; ++k)
+        v[l+k] = (*wl <= *wr ? *wl++ : *wr--);
+    for (; wl <= wm; ++k)
+        v[l+k] = *wl++;
+    for (; wr > wm; ++k)
+        v[l+k] = *wr--;
 
 }
 
@@ -276,25 +276,25 @@ void _merge(int *v, int *w, int l, int m, int r)
 */
 void heap_sort(int *v, int l, int r)
 {
-	int n = r-l+1;
-	if (n <= 64) {
-		insertion_sort(v, l, r); // insertion sort is fast enough for small arrays
-		return;
-	}
-	
-	int i, t;
-	heap h;
-	h.v = (l == 0 ? v : &v[l]);
-	if ((h.length = n) <= 1)
-		return;
-	build_max_heap(&h);
-	for (i = h.length-1; i > 0; --i) {
-		t = v[0];
-		v[0] = v[i];
-		v[i] = t;
-		h.heap_size--;
-		max_heapify(&h, 0);
-	}
+    int n = r-l+1;
+    if (n <= 64) {
+        insertion_sort(v, l, r); // insertion sort is fast enough for small arrays
+        return;
+    }
+    
+    int i, t;
+    heap h;
+    h.v = (l == 0 ? v : &v[l]);
+    if ((h.length = n) <= 1)
+        return;
+    build_max_heap(&h);
+    for (i = h.length-1; i > 0; --i) {
+        t = v[0];
+        v[0] = v[i];
+        v[i] = t;
+        h.heap_size--;
+        max_heapify(&h, 0);
+    }
 }
 
 /* Input:
@@ -308,10 +308,10 @@ void heap_sort(int *v, int l, int r)
 */
 void build_max_heap(heap *h)
 {
-	h->heap_size = h->length;
-	int i;
-	for (i = h->length/2 - 1; i >= 0; --i)
-		max_heapify(h, i);
+    h->heap_size = h->length;
+    int i;
+    for (i = h->length/2 - 1; i >= 0; --i)
+        max_heapify(h, i);
 }
 
 /* Input:
@@ -328,23 +328,23 @@ void build_max_heap(heap *h)
 */
 void max_heapify(heap *h, int i)
 {
-	int fl = (h->heap_size)>>1; // index of first leaf is heap_size/2
-	while (i < fl) {
-		int l = (i << 1) | 0x01; // left child index l = 2*i+1
-		int r = (i + 1) << 1; // right child index r = 2*i+2 = 2*(i+1)
-		int t, si=i; // t = temporary, si = swap index
-		if (l < h->heap_size && h->v[l] > h->v[i])
-			si = l;
-		if (r < h->heap_size && h->v[r] > h->v[si])
-			si = r;
-		if (si != i) {
-			t = h->v[i];
-			h->v[i] = h->v[si];
-			h->v[si] = t;
-			i = si;
-		} else
-			break;
-	}
+    int fl = (h->heap_size)>>1; // index of first leaf is heap_size/2
+    while (i < fl) {
+        int l = (i << 1) | 0x01; // left child index l = 2*i+1
+        int r = (i + 1) << 1; // right child index r = 2*i+2 = 2*(i+1)
+        int t, si=i; // t = temporary, si = swap index
+        if (l < h->heap_size && h->v[l] > h->v[i])
+            si = l;
+        if (r < h->heap_size && h->v[r] > h->v[si])
+            si = r;
+        if (si != i) {
+            t = h->v[i];
+            h->v[i] = h->v[si];
+            h->v[si] = t;
+            i = si;
+        } else
+            break;
+    }
 }
 
 /* Input:
@@ -360,11 +360,11 @@ void max_heapify(heap *h, int i)
 */
 void quicksort(int *v, int l, int r)
 {
-	if (l < r) {
-		int q = quicksort_partition(v,l,r);
-		quicksort(v,l,q-1);
-		quicksort(v,q+1,r);
-	}
+    if (l < r) {
+        int q = quicksort_partition(v,l,r);
+        quicksort(v,l,q-1);
+        quicksort(v,q+1,r);
+    }
 }
 
 /* Input:
@@ -381,85 +381,85 @@ void quicksort(int *v, int l, int r)
 */
 int quicksort_partition(int *v, int l, int r)
 {
-	int x = v[r], i=l-1, j, t;
-	for (j = l; j <= r-1; j++) {
-		if (v[j] <= x) {
-			i++;
-			t = v[i];
-			v[i] = v[j];
-			v[j] = t;
-		}
-	}
-	t = v[i+1];
-	v[i+1]=v[r];
-	v[r]=t;
-	return i+1;
+    int x = v[r], i=l-1, j, t;
+    for (j = l; j <= r-1; j++) {
+        if (v[j] <= x) {
+            i++;
+            t = v[i];
+            v[i] = v[j];
+            v[j] = t;
+        }
+    }
+    t = v[i+1];
+    v[i+1]=v[r];
+    v[r]=t;
+    return i+1;
 }
 
 void print_vector(int *v, int n)
 {
-	int i;
-	for (i = 0; i < n; ++i)
-		printf("%d,",v[i]);
-	printf("\n");
+    int i;
+    for (i = 0; i < n; ++i)
+        printf("%d,",v[i]);
+    printf("\n");
 }
 
 int main(void)
 {
-	// Array of function pointers to sort functions
-	typedef void (*sort_fptr)(int*,int,int);
-	sort_fptr fptrs[] = {&insertion_sort, &bubble_sort, &selection_sort, &heap_sort, &merge_sort, &quicksort, NULL};
+    // Array of function pointers to sort functions
+    typedef void (*sort_fptr)(int*,int,int);
+    sort_fptr fptrs[] = {&insertion_sort, &bubble_sort, &selection_sort, &heap_sort, &merge_sort, &quicksort, NULL};
 
-	// Output file to store timings
-	FILE *fp;
-	if ((fp = fopen("SortTest.txt","w")) == NULL) {
-		fprintf(stderr, "Cannot open output file.\n");
-		exit(-1);
-	}
-	
-	// Loop over different array sizes (powers of 2)
-	int i, j, n, *v, *w;
-	for (n = 2; n <= 1024*1024*8; n*=2) {
-		// Initialize arrays v,w of size n with random elements
-		v = (int*)malloc(n*sizeof(int));
-		w = (int*)malloc(n*sizeof(int));
-		if (v == NULL || w == NULL) {
-			fprintf(stderr, "Cannot allocate memory.\n");
-			exit(-1);
-		}
-		for (i = 0; i < n; ++i)
-			v[i] = rand() % n;
-		// w is a copy of v in order to restore v between successive sorts
-		memcpy(w, v, n*sizeof(int));
-		
-		// Now loop over each function pointer (sort function) and invoke it
-		printf("%10d",n);
-		fprintf(fp, "%10d", n);
-		clock_t start, stop, diff;
-		sort_fptr fptr = NULL;
-		j = 0;
-		for (fptr = fptrs[j]; fptr != NULL; fptr = fptrs[++j]) {
-			if (n > 32*1024 && j <= 2) {
-				// Don't even bother with insertion, bubble, or selection sort if n>32k
-				diff = 0;
-			}
-			else {
-				start = clock();
-				fptr(v,0,n-1); // Invoke the sort function
-				stop = clock();
-				diff = stop-start;
-				memcpy(v, w, n*sizeof(int)); // Restore v from w for next sort
-			}
-			printf("%10f",(float)diff/CLOCKS_PER_SEC);
-			fprintf(fp, "%10f", (float)diff/CLOCKS_PER_SEC);
-		}
-		printf("\n");
-		fprintf(fp, "\n");
-		
-		free(v);
-		free(w);
-	}
+    // Output file to store timings
+    FILE *fp;
+    if ((fp = fopen("SortTest.txt","w")) == NULL) {
+        fprintf(stderr, "Cannot open output file.\n");
+        exit(-1);
+    }
+    
+    // Loop over different array sizes (powers of 2)
+    int i, j, n, *v, *w;
+    for (n = 2; n <= 1024*1024*8; n*=2) {
+        // Initialize arrays v,w of size n with random elements
+        v = (int*)malloc(n*sizeof(int));
+        w = (int*)malloc(n*sizeof(int));
+        if (v == NULL || w == NULL) {
+            fprintf(stderr, "Cannot allocate memory.\n");
+            exit(-1);
+        }
+        for (i = 0; i < n; ++i)
+            v[i] = rand() % n;
+        // w is a copy of v in order to restore v between successive sorts
+        memcpy(w, v, n*sizeof(int));
+        
+        // Now loop over each function pointer (sort function) and invoke it
+        printf("%10d",n);
+        fprintf(fp, "%10d", n);
+        clock_t start, stop, diff;
+        sort_fptr fptr = NULL;
+        j = 0;
+        for (fptr = fptrs[j]; fptr != NULL; fptr = fptrs[++j]) {
+            if (n > 32*1024 && j <= 2) {
+                // Don't even bother with insertion, bubble, or selection sort if n>32k
+                diff = 0;
+            }
+            else {
+                start = clock();
+                fptr(v,0,n-1); // Invoke the sort function
+                stop = clock();
+                diff = stop-start;
+                memcpy(v, w, n*sizeof(int)); // Restore v from w for next sort
+            }
+            printf("%10f",(float)diff/CLOCKS_PER_SEC);
+            fprintf(fp, "%10f", (float)diff/CLOCKS_PER_SEC);
+        }
+        printf("\n");
+        fprintf(fp, "\n");
+        
+        free(v);
+        free(w);
+    }
 
-	// Cleanup
-	fclose(fp);
+    // Cleanup
+    fclose(fp);
 }
