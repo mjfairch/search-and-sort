@@ -1,4 +1,7 @@
-// Searching and sorting.  Michael J. Fairchild.  http://mikef.org/
+/*
+ Basic search and sort algorithms in C.
+ Author: Michael J. Fairchild,  http://mikef.org/
+*/
 
 #include <stdlib.h>
 #include <stdio.h>
