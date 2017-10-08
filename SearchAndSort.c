@@ -415,7 +415,7 @@ int main(void)
 
     // Output file to store timings
     FILE *fp;
-    if ((fp = fopen("SortTest.txt","w")) == NULL) {
+    if ((fp = fopen("results.txt","w")) == NULL) {
         fprintf(stderr, "Cannot open output file.\n");
         exit(-1);
     }

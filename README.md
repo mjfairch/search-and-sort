@@ -1,5 +1,8 @@
-Search and Sort
-===============
-To compile with the GNU C compiler, simply execute:
+# Search and Sort
 
-gcc -Wall -O3 SearchAndSort.c
+Implementation in C of the basic search and sort algorithms: linear search, 
+binary search (for sorted data), insertion sort, bubble sort, selection sort, 
+merge sort, heap sort, and quick sort.
+
+## Author
+Michael J. Fairchild, [http://www.mikef.org](http://www.mikef.org)
